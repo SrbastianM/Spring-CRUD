@@ -26,7 +26,17 @@ public class EmployerService {
         employerRepository.save(employer);
     }
 
-    public void delete(Long id) {
+    public void updateEmployer(Employer employer, Long employerID) {
+       Employer existingEmployer = employerRepository.findById(employerID).orElseThrow(() -> new RuntimeException("Employer not found" + employerID));
+
+       existingEmployer.setFirstName(employer.getFirstName());
+       existingEmployer.setLastName(employer.getLastName());
+       existingEmployer.setEmail(employer.getEmail());
+
+       employerRepository.save(existingEmployer);
+    }
+
+    public void deleteEmployer(Long id) {
         employerRepository.deleteById(id);
     }
 }
