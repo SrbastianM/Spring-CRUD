@@ -32,4 +32,53 @@ spring.jpa.show-sql=true
 !Remember: This app runs in the host: http://localhost:8080
 - Quick show returns and conditions to use the endpoints:
 
-
+getAll: 
+```JSON
+[
+    {
+        "employerId": 1,
+        "firstName": "Juan",
+        "lastName": "Pérez",
+        "email": "juan.perez@example.com"
+    },
+    {
+        "employerId": 5,
+        "firstName": "Pedro",
+        "lastName": "Pruebas",
+        "email": "Pedro@mail.com"
+    }
+]
+```
+getEmployer:
+```JSON
+{
+    "employerId": 1,
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "email": "juan.perez@example.com"
+}
+```
+saveEmployer: 
+```JSON
+{
+    "firstName": "Juan",
+    "lastName": "Pérez",
+    "email": "juan.perez@example.com"
+}
+```
+updateEmployer:
+```JSON
+{
+// At this point you need to know the id for the user you want to update and have at least one user in the DB
+    "firstName": "Update",
+    "lastName": "Update Two",
+    "email": "1@mail.com"
+}
+```
+deleteEmployer: To use this enpoint you need to know the id of the user and use like this: http://localhost:8080/api/v1/employers/6
+- If the record id dont match with anything in the DB, it returns a message like this:
+```CMD
+Error deleting a employer : Employer not found 6
+```
+---
+At this momento I'm working in the SPA to use this CRUD
