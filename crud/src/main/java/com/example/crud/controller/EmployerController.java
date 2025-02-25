@@ -33,7 +33,7 @@ public class EmployerController {
     //  Return from the uri "api/v1/employerId" the record found with the pass id
     //  Note: The editor transform my if statement to this functional return line:38
     @GetMapping("/{employerId}")
-    public ResponseEntity<Employer> getId(@PathVariable("employerId") Long employerId) {
+    public ResponseEntity<Employer> getEmployer(@PathVariable("employerId") Long employerId) {
         try {
             Optional<Employer> employer = employerService.getEmployer(employerId);
             return employer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null));
@@ -60,7 +60,7 @@ public class EmployerController {
             employerService.deleteEmployer(employerId);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Record successfully deleted");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting a employer: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting a employer : " + e.getMessage());
         }
     }
 

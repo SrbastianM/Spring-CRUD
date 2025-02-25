@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+// This service use the auto-injection of the repository. In this particular case access to the DB and
+// all the CRUD methods.
 @Service
 public class EmployerService {
+    // Auto-injection of the repository
     @Autowired
     EmployerRepository employerRepository;
 
@@ -36,7 +39,9 @@ public class EmployerService {
        employerRepository.save(existingEmployer);
     }
 
-    public void deleteEmployer(Long id) {
-        employerRepository.deleteById(id);
+    public void deleteEmployer(Long employerId) {
+        Employer existingEmployer = employerRepository.findById(employerId)
+                .orElseThrow(() -> new RuntimeException("Employer not found: " + employerId));
+        employerRepository.delete(existingEmployer);
     }
 }
